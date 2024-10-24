@@ -27,7 +27,8 @@ app.use(
     credentials: true,
     maxAge: 36000,
   })
-); // this is a middleware that allows cross origin resource sharing
+); 
+// this is a middleware that allows cross origin resource sharing
 
 
 //link to routes

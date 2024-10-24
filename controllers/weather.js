@@ -2,9 +2,9 @@
 const axios = require('axios');
 require('dotenv').config();  // Ensure you have your API keys in the .env file
 
-const handleWeatherRequest = async (req, res) => { // Notice res is passed here
+const handleWeatherRequest = async (req, res) => {
     const location = req.params.location;
-    const openCageApiKey = process.env.LONG_API_KEY;  // Make sure you are using the correct env key
+    const openCageApiKey = process.env.LONG_API_KEY;  // Ensure you are using the correct env key for OpenCage
     const openMeteoApiUrl = 'https://api.open-meteo.com/v1/forecast';
 
     try {
@@ -17,7 +17,7 @@ const handleWeatherRequest = async (req, res) => { // Notice res is passed here
         });
 
         const results = openCageResponse.data.results;
-        
+
         // Check if any results were returned
         if (results.length === 0) {
             return res.status(404).json({ message: 'Location not found' });
@@ -25,15 +25,14 @@ const handleWeatherRequest = async (req, res) => { // Notice res is passed here
 
         const { lat, lng } = results[0].geometry;
 
-        // Step 2: Use the latitude and longitude to get weather data from Open-Meteo
+        // Step 2: Use the latitude and longitude to get daily weather data from Open-Meteo
         const weatherResponse = await axios.get(openMeteoApiUrl, {
             params: {
                 latitude: lat,
                 longitude: lng,
-                current_weather: true,
-                hourly: 'temperature_2m,rain,wind_speed_80m',
-                daily: 'temperature_2m_max,temperature_2m_min,sunrise,sunset,rain_sum',
-                forecast_days: 16
+                daily: 'temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,windgusts_10m_max,sunrise,sunset',
+                forecast_days: 7,  // You can adjust this to get more days if needed
+                timezone: 'auto'   // Automatically adjust to the correct timezone
             }
         });
 
@@ -44,7 +43,7 @@ const handleWeatherRequest = async (req, res) => { // Notice res is passed here
             longitude: lng,
             weather: weatherResponse.data
         });
-        
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error retrieving weather data' });
