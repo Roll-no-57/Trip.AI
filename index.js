@@ -2,16 +2,17 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const connectDB = require('./config/db');
 require('dotenv').config();
 
 // Connect to database using mongoose
-// const mongoose = require('mongoose');
-
+connectDB();
 
 // Importing the routes
 // const userRoutes = require('./routes/user');
 const chat = require('./routes/chat');
 const weather = require('./routes/weather')
+const tour = require('./routes/tour')
 
 //declare and configure the app
 const app = express()
@@ -35,6 +36,8 @@ app.use(
 // app.use('/api/v1/user', userRoutes);
 app.use('/api/v1', chat);
 app.use('/api/v1',weather);
+app.use('/api/v1',tour);
+
 
 
 //Setting up the connection
