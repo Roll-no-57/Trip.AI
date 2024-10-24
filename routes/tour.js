@@ -23,8 +23,8 @@ router.get('/videos/:id', getVideoFromSpecificTour);
 router.post('/tour', saveTourInfo);
 router.get('/tour', getAllTours);
 router.get('/tour/:id',getTourById);
-router.post('/tour/:tourId/upload-image', upload.single('image'), addImageToTour);
-router.post('/tour/:id/video', createVideoForTour); // Add this line
+router.post('/tour/uploadimage/:tourId', upload.single('image'), addImageToTour);
+router.post('/tour/video/:id', createVideoForTour); // Add this line
 
 
 module.exports = router;
