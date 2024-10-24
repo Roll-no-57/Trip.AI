@@ -67,13 +67,18 @@ const imageSchema = new mongoose.Schema({
 
 // Updated main tour schema
 const tourSchema = new mongoose.Schema({
-    // New fields
+    name: {
+        type: String,
+        default: function() {
+            return `Tour-${Tour.countDocuments() + 1}`;
+        }
+    },
     email: { type: String, required: true },
     userInput: userInputSchema,
     hotel: hotelSchema,
     estimationBudget: budgetEstimationSchema,
     tourPlan: [dailyItinerarySchema],
-    
+
     // Existing fields (all made optional to maintain backward compatibility)
     location: { type: String },
     transportation: transportationSchema,
@@ -102,6 +107,15 @@ const tourSchema = new mongoose.Schema({
     },
     album: [imageSchema],
     tourVideo: { type: String }
+});
+
+// Pre-save hook to set name dynamically
+tourSchema.pre('save', async function(next) {
+    if (!this.name) {
+        const count = await Tour.countDocuments();
+        this.name = `Tour-${count + 1}`;
+    }
+    next();
 });
 
 const Tour = mongoose.model('Tour', tourSchema);

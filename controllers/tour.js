@@ -41,6 +41,10 @@ const saveTourInfo = async (req, res) => {
             tourPlan
         } = req.body;
 
+        // Get the current count of tours to generate the name
+        const tourCount = await Tour.countDocuments({});
+        const tourName = `Tour-${tourCount + 1}`; // Increment count for the new tour name
+
         // Create new tour with required fields
         const newTour = new Tour({
             email: email,
@@ -72,9 +76,9 @@ const saveTourInfo = async (req, res) => {
                     status: task.status || 'pending'
                 }))
             })),
-            // Initialize empty arrays/objects for backward compatibility
             album: [],
-            tourVideo: ''
+            tourVideo: '',
+            name: tourName // Set the name of the tour
         });
 
         const savedTour = await newTour.save();
