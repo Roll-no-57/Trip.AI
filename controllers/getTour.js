@@ -28,4 +28,40 @@ const getTourById = async (req, res) => {
     }
 };
 
-module.exports = { getAllTours, getTourById }; // Ensure to export the function
+
+
+const getLatestTourByEmail = async (req, res) => {
+    try {
+        const { email } = req.params; // Get email from URL parameters
+        
+        // Find all tours for the email and sort by _id in descending order
+        // Limit to 1 to get only the latest tour
+        const latestTour = await Tour.findOne({ email })
+            .sort({ _id: -1 })
+            .limit(1);
+
+        if (!latestTour) {
+            return res.status(404).json({ 
+                success: false, 
+                message: 'No tours found for this email' 
+            });
+        }
+
+        res.status(200).json({ 
+            success: true, 
+            data: latestTour 
+        });
+    } catch (error) {
+        console.log("Error in fetching latest tour:", error);
+        res.status(500).json({ 
+            success: false, 
+            message: "Server Error!" 
+        });
+    }
+};
+
+module.exports = { 
+    getAllTours, 
+    getTourById, 
+    getLatestTourByEmail  // Add this to exports
+};
