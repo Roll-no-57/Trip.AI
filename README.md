@@ -193,12 +193,51 @@ Example Response:
 # Weather
 
 ## a. Get weather info by location
-Endpoint URL: `GET /api/v1/weather`  
+Endpoint URL: `GET /api/v1/weather/:location`  
 Request Body:   
 ```json
 ```
 Example Response:
 ```json
+import React, { useState } from 'react';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
+const SpeechToText = () => {
+  const [ setText] = useState('');
+  const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } =
+    useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+
+  const startListening = () => {
+    SpeechRecognition.startListening({ continuous: true });
+  };
+
+  const handleSend = () => {
+    setText(transcript);
+    // Send transcript to backend for processing, etc.
+  };
+
+  return (
+    <div>
+      <h2>Speech Recognition Demo</h2>
+      <button onClick={startListening} disabled={listening}>
+        Start Listening
+      </button>
+      <button onClick={SpeechRecognition.stopListening}>Stop Listening</button>
+      <button onClick={resetTranscript}>Reset</button>
+      <p>{listening ? 'Listening...' : 'Click to start speaking'}</p>
+      <p>Transcript: {transcript}</p>
+
+      <button onClick={handleSend}>Send to LLM</button>
+    </div>
+  );
+};
+
+export default SpeechToText;
+
 ```
 
 
