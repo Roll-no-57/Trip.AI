@@ -199,45 +199,104 @@ Request Body:
 ```
 Example Response:
 ```json
-import React, { useState } from 'react';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
-const SpeechToText = () => {
-  const [ setText] = useState('');
-  const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } =
-    useSpeechRecognition();
-
-  if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
-  }
-
-  const startListening = () => {
-    SpeechRecognition.startListening({ continuous: true });
-  };
-
-  const handleSend = () => {
-    setText(transcript);
-    // Send transcript to backend for processing, etc.
-  };
-
-  return (
-    <div>
-      <h2>Speech Recognition Demo</h2>
-      <button onClick={startListening} disabled={listening}>
-        Start Listening
-      </button>
-      <button onClick={SpeechRecognition.stopListening}>Stop Listening</button>
-      <button onClick={resetTranscript}>Reset</button>
-      <p>{listening ? 'Listening...' : 'Click to start speaking'}</p>
-      <p>Transcript: {transcript}</p>
-
-      <button onClick={handleSend}>Send to LLM</button>
-    </div>
-  );
-};
-
-export default SpeechToText;
-
+{
+    "location": "Dhaka, Dhaka District, Bangladesh",
+    "latitude": 23.7644025,
+    "longitude": 90.389015,
+    "weather": {
+        "latitude": 23.75,
+        "longitude": 90.375,
+        "generationtime_ms": 0.0629425048828125,
+        "utc_offset_seconds": 21600,
+        "timezone": "Asia/Dhaka",
+        "timezone_abbreviation": "+06",
+        "elevation": 9,
+        "daily_units": {
+            "time": "iso8601",
+            "temperature_2m_max": "°C",
+            "temperature_2m_min": "°C",
+            "precipitation_sum": "mm",
+            "precipitation_probability_max": "%",
+            "windgusts_10m_max": "km/h",
+            "sunrise": "iso8601",
+            "sunset": "iso8601"
+        },
+        "daily": {
+            "time": [
+                "2024-10-24",
+                "2024-10-25",
+                "2024-10-26",
+                "2024-10-27",
+                "2024-10-28",
+                "2024-10-29",
+                "2024-10-30"
+            ],
+            "temperature_2m_max": [
+                29.2,
+                29.9,
+                31.8,
+                32.9,
+                32.6,
+                32.1,
+                31.3
+            ],
+            "temperature_2m_min": [
+                24.7,
+                24.2,
+                24.9,
+                25.4,
+                25.2,
+                25,
+                25.1
+            ],
+            "precipitation_sum": [
+                5,
+                6.3,
+                0,
+                0,
+                0.6,
+                0.3,
+                0.3
+            ],
+            "precipitation_probability_max": [
+                48,
+                68,
+                13,
+                13,
+                0,
+                5,
+                18
+            ],
+            "windgusts_10m_max": [
+                28.8,
+                33.1,
+                15.5,
+                11.9,
+                12.6,
+                16.2,
+                11.5
+            ],
+            "sunrise": [
+                "2024-10-24T06:00",
+                "2024-10-25T06:00",
+                "2024-10-26T06:01",
+                "2024-10-27T06:01",
+                "2024-10-28T06:02",
+                "2024-10-29T06:02",
+                "2024-10-30T06:03"
+            ],
+            "sunset": [
+                "2024-10-24T17:25",
+                "2024-10-25T17:24",
+                "2024-10-26T17:23",
+                "2024-10-27T17:22",
+                "2024-10-28T17:22",
+                "2024-10-29T17:21",
+                "2024-10-30T17:20"
+            ]
+        }
+    }
+}
 ```
 
 
