@@ -11,7 +11,7 @@ require('dotenv').config();
 // Importing the routes
 // const userRoutes = require('./routes/user');
 const chat = require('./routes/chat');
-
+const weather = require('./routes/weather')
 
 //declare and configure the app
 const app = express()
@@ -33,7 +33,7 @@ app.use(
 //link to routes
 // app.use('/api/v1/user', userRoutes);
 app.use('/api/v1', chat);
-
+app.use('/api/v1',weather);
 
 
 //Setting up the connection
