@@ -14,6 +14,7 @@ const chat = require('./routes/chat');
 const weather = require('./routes/weather')
 const tour = require('./routes/tour')
 const demo = require('./routes/demo')
+const searchImage = require('./routes/searchImage')
 
 //declare and configure the app
 const app = express()
@@ -39,6 +40,7 @@ app.use('/api/v1', chat);
 app.use('/api/v1',weather);
 app.use('/api/v1',tour);
 app.use('/api/v1',demo);
+app.use('/api/v1',searchImage);
 
 
 
