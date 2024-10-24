@@ -14,6 +14,7 @@
 // module.exports = router;
 const express = require('express');
 const { saveTourInfo, addImageToTour, createVideoForTour } = require('../controllers/tour'); // Import your controller
+// const { getTourById, getAllTours } = require('../controllers/getTour'); // Import your controller
 const router = express.Router();
 const { upload } = require('../config/cloudinary'); // Import the upload configuration
 const fs = require('fs');
@@ -27,6 +28,11 @@ if (!fs.existsSync(tempDir)) {
 
 // Existing routes
 router.post('/tour', saveTourInfo);
+
+// router.get('/tour/:tourId', getTourById);
+// route.get('/tour', getAllTours);
+
+
 router.post('/tour/:tourId/upload-image', upload.single('image'), addImageToTour);
 
 // New route for generating video

@@ -28,51 +28,33 @@ const handleChatRequest = async (req) => {
     throw new Error('Invalid prompt. Please provide a non-empty string.');
   }
 
-  // Define the expected response structure
   const expectedStructure = {
     "transportationOptions": {
-      "fromDhakaToCoxBazar": {
-        "options": [
-          {
-            "type": "bus",
-            "price": "current price",
-            "duration": "duration"
-          },
-          {
-            "type": "train",
-            "price": "current price",
-            "duration": "duration"
-          }
-        ],
-        "fromTeknafToSaintMartin": [
-          {
-            "mode": "ship",
-            "timings": "current timings",
-            "price": "current price"
-          }
-        ],
-        "localTransportation": "local transport options on the island"
+      "Going": {
+        "start": "start",
+        "end": "destination",
+        "goBY": {
+          "type": "bus",
+          "price": "current price",
+          "duration": "duration"
+        },
+      },
+      "Returning": {
+
+        "start": "start",
+        "end": "destination",
+        "goBY": {
+          "type": "bus",
+          "price": "current price",
+          "duration": "duration"
+        }
+
       }
     },
     "accommodationOptions": {
-      "budget": [
-        {
-          "name": "Hotel Name",
-          "priceRange": "under 3000 BDT/night"
-        }
-      ],
-      "midRange": [
-        {
-          "name": "Hotel Name",
-          "priceRange": "3000-7000 BDT/night"
-        }
-      ],
-      "luxury": [
-        {
-          "name": "Hotel Name",
-          "priceRange": "7000+ BDT/night"
-        }
-      ]
+      "budgetType": "budget type",
+      "name": "Hotel Name",
+      "priceRange": "under 3000 BDT/night"
     },
     "dailyItinerary": {
       "day1": {
@@ -155,7 +137,7 @@ const handleChatRequest = async (req) => {
   // Add specific instructions for JSON response
   const enhancedPrompt = `${prompt}
 
-You are a travel planning expert for Bangladesh. Please provide a detailed travel itinerary following exactly this JSON structure, with no additional text or formatting:
+You are a travel planning expert for Bangladesh. Please provide a detailed travel itinerary following exactly this JSON structure with user inputs, with no additional text or formatting:
 
 ${JSON.stringify(expectedStructure, null, 2)}
 
@@ -166,24 +148,27 @@ Important requirements:
 4. Don't use comments or markdown
 5. Include realistic, current prices and timings for Bangladesh
 6. Focus on providing detailed, practical information for university students
+7. Give a daily itinerary for 3 days by default or as user wants, with activities, best spots, and food suggestions
 7. Maintain the exact structure shown above
-8. Fill in all fields with actual values, don't leave placeholder text`;
+8. Fill in all fields with actual values, don't leave placeholder text
+`;
+
 
   try {
     const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: enhancedPrompt }]}],
+      contents: [{ role: "user", parts: [{ text: enhancedPrompt }] }],
       generationConfig,
     });
 
     const response = await result.response;
     const text = response.text();
-    
+
     // Try to parse the response as JSON
     try {
       // Remove any potential markdown code block markers
       const cleanJson = text.replace(/```json\n?|\n?```/g, '').trim();
       const jsonResponse = JSON.parse(cleanJson);
-      
+
       // Validate that the response matches the expected structure
       const validateStructure = (expected, actual, path = '') => {
         if (typeof expected !== typeof actual) {
