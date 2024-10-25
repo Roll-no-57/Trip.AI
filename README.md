@@ -1,6 +1,7 @@
 # AI-Trip-Planner
 
-## Team BUET_HELLO_WORLD
+## BUET CSE FEST 24 Hackathon AI/API section
+### Team BUET_HELLO_WORLD
 members:Mosharaf Hossain Apurbo,Salehin Islam,Mohiuddin Sizan.
 
 ## Presentation link
