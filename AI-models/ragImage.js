@@ -119,7 +119,7 @@ async function main(UserSearchQuery) {
     try {
         // Load image data from file
         // const imageData = await loadImageData('../controllers/imageDescription.txt');
-        const imageDataPath = 'C:/Users/DELL/Desktop/BCF2024Hackathon/AI-Trip-Planner/controllers/imageDescription.txt';
+        const imageDataPath = 'E:/Others/Web-Developement/AI-Trip-planner/AI-Trip-Planner/controllers/imageDescription.txt';
         const imageData = await loadImageData(imageDataPath);
 
 
