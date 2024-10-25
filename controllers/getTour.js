@@ -12,16 +12,13 @@ const getAllTours = async (req, res) => {
 };
 
 
-const getTourById = async (req, res) => {
+async function getTourById(id){
     try {
-        const { id } = req.params; // Extract the tour ID from the request parameters
+         // Extract the tour ID from the request parameters
         const tour = await Tour.findById(id);
 
-        if (!tour) {
-            return res.status(404).json({ success: false, message: 'Tour not found' });
-        }
-
-        res.status(200).json({ success: true, data: tour });
+        // res.status(200).json({ success: true, data: tour });
+        return tour;
     } catch (error) {
         console.log("Error in fetching tour:", error);
         res.status(500).json({ success: false, message: "Server Error!" });

@@ -616,6 +616,51 @@ Example Response:
     "https://res.cloudinary.com/dg1sx19ve/video/upload/v1729797424/i123k9wsdattypkhry1a.mp4"
 }
 ```
+# serch
+
+## a. POST images
+Endpoint URL: `POST /api/v1/api/v1/searchImage`  
+Request Body:   
+```json
+{
+    "query":"earth"
+}
+```
+Example Response:
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "imageUrl": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792279/tour-album/qwz8gedq1hyohou7cesg.jpg",
+            "description": "The image shows a realistic shot of Earth from space",
+            "score": 0.83838588
+        },
+        {
+            "imageUrl": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729806308/tour-album/xd5th4mv5lopyyzwadkf.png",
+            "description": "The image shows a page of text in a foreign language at the top",
+            "score": 0.720358789
+        },
+        {
+            "imageUrl": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792305/tour-album/qhutirsrlvb1gp7ntts4.jpg",
+            "description": "The image depicts a replica of the Eiffel Tower in Paris",
+            "score": 0.71889776
+        },
+        {
+            "imageUrl": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792289/tour-album/zqzceniffdxo2p8c5n3z.jpg",
+            "description": "A coastal road winds for approximately a quarter mile alongside vibrant green fields dotted with occasional brown patches",
+            "score": 0.702491164
+        },
+        {
+            "imageUrl": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729797402/tour-album/n5ebzzuw8hue4wube8gq.jpg",
+            "description": "Two brown kangaroos seen from the side",
+            "score": 0.696485102
+        }
+    ]
+}
+```
+
+
 
 
 

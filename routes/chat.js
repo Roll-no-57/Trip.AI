@@ -6,7 +6,7 @@ const { handleChatRequest } = require('../controllers/chat');
 // POST /api/v1/chat
 router.post('/chat', async (req, res) => {
   try {
-    const response = await handleChatRequest(req);
+    const response = await handleChatRequest(req.body);
     res.json({ 
       success: true,
       response: response 

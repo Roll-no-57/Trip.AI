@@ -13,7 +13,7 @@ const getAllImagesFromTours = async () => {
     }
 };
 
-const getAllImagesFromSpecificTours = async (id) => {
+async function getAllImagesFromSpecificTours (id) {
     try {
         // Fetch the specific tour from the database
         const tour = await Tour.findById(id, 'album'); // Only retrieve the album field
