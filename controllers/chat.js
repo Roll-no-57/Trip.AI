@@ -21,192 +21,32 @@ const generationConfig = {
 };
 
 // Function to handle chat requests
-const handleChatRequest = async (req) => {
-  const { prompt } = req.body;
-
-  if (!prompt || typeof prompt !== 'string') {
-    throw new Error('Invalid prompt. Please provide a non-empty string.');
-  }
-
-  const expectedStructure = {
-    "transportationOptions": {
-      "Going": {
-        "start": "start",
-        "end": "destination",
-        "goBY": {
-          "type": "bus",
-          "price": "current price",
-          "duration": "duration"
-        },
-      },
-      "Returning": {
-
-        "start": "start",
-        "end": "destination",
-        "goBY": {
-          "type": "bus",
-          "price": "current price",
-          "duration": "duration"
-        }
-
-      }
-    },
-    "accommodationOptions": {
-      "budgetType": "budget type",
-      "name": "Hotel Name",
-      "priceRange": "under 3000 BDT/night"
-    },
-    "dailyItinerary": {
-      "day1": {
-        "activities": [
-          {
-            "activity": "activity description",
-            "time": "timing",
-            "duration": "estimated time"
-          }
-        ],
-        "bestSpots": "best spots to visit",
-        "restaurants": "suggested food spots"
-      },
-      "day2": {
-        "activities": [
-          {
-            "activity": "activity description",
-            "time": "timing",
-            "duration": "estimated time"
-          }
-        ],
-        "bestSpots": "best spots to visit",
-        "restaurants": "suggested food spots"
-      },
-      "day3": {
-        "activities": [
-          {
-            "activity": "activity description",
-            "time": "timing",
-            "duration": "estimated time"
-          }
-        ],
-        "bestSpots": "best spots to visit",
-        "restaurants": "suggested food spots"
-      }
-    },
-    "mealPlan": {
-      "breakfast": [
-        {
-          "option": "breakfast option",
-          "price": "price"
-        }
-      ],
-      "lunch": [
-        {
-          "option": "lunch recommendation",
-          "price": "price"
-        }
-      ],
-      "dinner": [
-        {
-          "option": "dinner suggestion",
-          "price": "price"
-        }
-      ],
-      "localSpecialties": "must-try local seafood and specialties"
-    },
-    "costBreakdown": {
-      "transportationTotal": "total cost",
-      "accommodation": {
-        "budget": "cost",
-        "midRange": "cost",
-        "luxury": "cost"
-      },
-      "foodExpenses": "estimated food cost",
-      "activityCosts": "total activity costs",
-      "emergencyFunds": "recommended emergency funds",
-      "totalBudgetPerPerson": "total budget per person"
-    },
-    "essentialTips": {
-      "bestTimeToVisit": "best time",
-      "weatherConsiderations": "weather info",
-      "localCustoms": "customs and etiquette",
-      "safetyPrecautions": "safety tips",
-      "whatToPack": "packing list",
-      "contactNumbers": "important contact numbers"
-    }
-  };
-
-  // Add specific instructions for JSON response
-  const enhancedPrompt = `${prompt}
-
-You are a travel planning expert for Bangladesh. Please provide a detailed travel itinerary following exactly this JSON structure with user inputs, with no additional text or formatting:
-
-${JSON.stringify(expectedStructure, null, 2)}
-
-Important requirements:
-1. Response must be valid JSON that can be parsed by JSON.parse()
-2. Use double quotes for all strings
-3. Don't include any explanatory text outside the JSON
-4. Don't use comments or markdown
-5. Include realistic, current prices and timings for Bangladesh
-6. Focus on providing detailed, practical information for university students
-7. Give a daily itinerary for 3 days by default or as user wants, with activities, best spots, and food suggestions
-7. Maintain the exact structure shown above
-8. Fill in all fields with actual values, don't leave placeholder text
-`;
-
-
+const handleChatRequest = async (prompt) => {
   try {
     const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: enhancedPrompt }] }],
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
       generationConfig,
     });
 
     const response = await result.response;
     const text = response.text();
 
-    // Try to parse the response as JSON
-    try {
-      // Remove any potential markdown code block markers
-      const cleanJson = text.replace(/```json\n?|\n?```/g, '').trim();
-      const jsonResponse = JSON.parse(cleanJson);
+    // Clean the response to remove special characters and formatting
+    const cleanText = text.replace(/[^a-zA-Z0-9\s]/g, '').trim(); // Remove special characters
 
-      // Validate that the response matches the expected structure
-      const validateStructure = (expected, actual, path = '') => {
-        if (typeof expected !== typeof actual) {
-          throw new Error(`Invalid type at ${path}. Expected ${typeof expected}, got ${typeof actual}`);
-        }
-        if (Array.isArray(expected)) {
-          if (!Array.isArray(actual)) {
-            throw new Error(`Expected array at ${path}`);
-          }
-          return;
-        }
-        if (typeof expected === 'object' && expected !== null) {
-          for (const key of Object.keys(expected)) {
-            if (!(key in actual)) {
-              throw new Error(`Missing key "${key}" at ${path}`);
-            }
-            validateStructure(expected[key], actual[key], `${path}.${key}`);
-          }
-        }
-      };
-
-      validateStructure(expectedStructure, jsonResponse);
-      return jsonResponse;
-    } catch (parseError) {
-      throw new Error(`Failed to parse or validate Gemini response as JSON: ${parseError.message}\nResponse was: ${text}`);
-    }
+    return cleanText; // Return only plain text
   } catch (error) {
     throw new Error(`Error generating response: ${error.message}`);
   }
 };
 
 // Example usage with error handling
-const handleJsonResponse = async (req, res) => {
+const handlePlainTextResponse = async (req, res) => {
   try {
-    const result = await handleChatRequest(req);
-    res.json(result);
+    const result = await handleChatRequest(req.body.prompt); // Assuming prompt is passed in the request body
+    res.send(result); // Send plain text response
   } catch (error) {
-    res.status(500).json({
+    res.status(500).send({
       error: error.message,
       status: 'error'
     });
@@ -215,5 +55,5 @@ const handleJsonResponse = async (req, res) => {
 
 module.exports = {
   handleChatRequest,
-  handleJsonResponse
+  handlePlainTextResponse
 };

@@ -15,6 +15,8 @@ const weather = require('./routes/weather')
 const tour = require('./routes/tour')
 const demo = require('./routes/demo')
 const searchImage = require('./routes/searchImage')
+const blog = require('./routes/blog')
+
 
 //declare and configure the app
 const app = express()
@@ -41,6 +43,8 @@ app.use('/api/v1',weather);
 app.use('/api/v1',tour);
 app.use('/api/v1',demo);
 app.use('/api/v1',searchImage);
+app.use('/api/v1',blog);
+
 
 
 

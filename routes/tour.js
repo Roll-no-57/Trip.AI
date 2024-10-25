@@ -35,9 +35,10 @@ router.get('/images', async (req, res) => {
         });
     }
 });
+
 router.get('/images/:id', async (req, res) => {
     try {
-        const allImages = await getAllImagesFromSpecificTours();
+        const allImages = await getAllImagesFromSpecificTours(req.params.id);
         res.status(200).json({
             success: true,
             message: 'Images retrieved successfully',
@@ -57,7 +58,17 @@ router.get('/images/:id', async (req, res) => {
 router.get('/videos/:id', getVideoFromSpecificTour);
 router.post('/tour', saveTourInfo);
 router.get('/tour', getAllTours);
-router.get('/tour/:id',getTourById);
+
+router.get('/tour/:id',async(req,res)=>{
+    try{
+        const tour = await getTourById(req.params.id);
+        res.status(200).json({ success: true, data: tour });
+    }catch(error){
+        console.log("Error in fetching tour:", error);
+        res.status(500).json({ success: false, message: "Server Error!" });
+    }
+})
+
 router.post('/tour/uploadimage/:tourId', upload.single('image'), addImageToTour);
 router.post('/tour/video/:id', createVideoForTour); // Add this line
 
