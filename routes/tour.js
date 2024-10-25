@@ -20,14 +20,49 @@ if (!fs.existsSync(tempDir)) {
 }
 
 // Route to get all images from all tours
-router.get('/images', getAllImagesFromTours);
-router.get('/images/:id', getAllImagesFromSpecificTours);
-router.get('/videos/:id', getVideoFromSpecificTour);
+// router.get('/images', getAllImagesFromTours);
+router.get('/images', async (req, res) => {
+    try {
+        const allImages = await getAllImagesFromTours();
+        res.status(200).json({
+            success: true,
+            message: 'Images retrieved successfully',
+            data: allImages
+        });
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error retrieving images',
+            error: error.message
+        });
+    }
+});
+router.get('/images/:id', async (req, res) => {
+    try {
+        const allImages = await getAllImagesFromSpecificTours();
+        res.status(200).json({
+            success: true,
+            message: 'Images retrieved successfully',
+            data: allImages
+        });
+    } catch (error) {
+        console.error('Error in route handler:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error retrieving images',
+            error: error.message
+        });
+    }
+});
+
+// router.get('/images/:id', getAllImagesFromSpecificTours);
+router.get('/videos/:id', getVideoFromSpecificTour);  
 router.post('/tour', saveTourInfo);
 router.get('/tour', getAllTours);
 router.get('/tour/:id',getTourById);
 router.post('/tour/uploadimage/:tourId', upload.single('image'), addImageToTour);
-router.post('/tour/video/:id', createVideoForTour); // Add this line
+router.post('/tour/video/:id', createVideoForTour); // add latest vlog in the tour
 router.get('/latest/:email', getLatestTourByEmail);
 router.patch('/tour/:tourId/task-status', async (req, res) => {
     try {
@@ -67,6 +102,7 @@ router.patch('/tour/:tourId/task-status', async (req, res) => {
         });
     }
 });
+
 
 
 module.exports = router;

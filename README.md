@@ -2,194 +2,6 @@
 
 The respective API endpoints are as follows:    
 
-# Chat
-
-## a. Get Travel plan 
-Endpoint URL: `GET /api/v1/chat`  
-Request Body:   
-```json
-{
-    "prompt":"I am planning to trip from dhaka to sreemangal .now tell me how can I go to trip . suggest me transportation,meals,accomodations there and total cost"
-}
-```
-Example Response:  
-```json
-{
-    "success": true,
-    "response": {
-        "transportationOptions": {
-            "Going": {
-                "start": "Dhaka",
-                "end": "Sreemangal",
-                "goBY": {
-                    "type": "AC Bus (S. Alam, Shyamoli, etc.)",
-                    "price": "500-700 BDT",
-                    "duration": "4-5 hours"
-                }
-            },
-            "Returning": {
-                "start": "Sreemangal",
-                "end": "Dhaka",
-                "goBY": {
-                    "type": "AC Bus (S. Alam, Shyamoli, etc.)",
-                    "price": "500-700 BDT",
-                    "duration": "4-5 hours"
-                }
-            }
-        },
-        "accommodationOptions": {
-            "budget": [
-                {
-                    "name": "Hotel Green View",
-                    "priceRange": "under 1500 BDT/night"
-                },
-                {
-                    "name": "Hotel Hilltop",
-                    "priceRange": "under 2000 BDT/night"
-                }
-            ],
-            "midRange": [
-                {
-                    "name": "Hotel Tea Resort",
-                    "priceRange": "3000-5000 BDT/night"
-                },
-                {
-                    "name": "Hotel Rajbari",
-                    "priceRange": "4000-6000 BDT/night"
-                }
-            ],
-            "luxury": [
-                {
-                    "name": "The Leela Palace",
-                    "priceRange": "7000+ BDT/night"
-                },
-                {
-                    "name": "The Westin Dhaka",
-                    "priceRange": "10000+ BDT/night"
-                }
-            ]
-        },
-        "dailyItinerary": {
-            "day1": {
-                "activities": [
-                    {
-                        "activity": "Visit the Lawachara National Park",
-                        "time": "9:00 AM",
-                        "duration": "3-4 hours"
-                    },
-                    {
-                        "activity": "Explore the tea gardens",
-                        "time": "1:00 PM",
-                        "duration": "2-3 hours"
-                    },
-                    {
-                        "activity": "Visit the Sreemangal Tea Museum",
-                        "time": "4:00 PM",
-                        "duration": "1-2 hours"
-                    }
-                ],
-                "bestSpots": "Lawachara National Park, Tea Gardens, Sreemangal Tea Museum",
-                "restaurants": "Hotel Green View Restaurant, Hotel Hilltop Restaurant"
-            },
-            "day2": {
-                "activities": [
-                    {
-                        "activity": "Visit the Madhabpur Lake",
-                        "time": "9:00 AM",
-                        "duration": "2-3 hours"
-                    },
-                    {
-                        "activity": "Explore the local market",
-                        "time": "12:00 PM",
-                        "duration": "1-2 hours"
-                    },
-                    {
-                        "activity": "Enjoy a boat ride on the Baikka Beel",
-                        "time": "3:00 PM",
-                        "duration": "1-2 hours"
-                    }
-                ],
-                "bestSpots": "Madhabpur Lake, Local Market, Baikka Beel",
-                "restaurants": "Hotel Tea Resort Restaurant, Hotel Rajbari Restaurant"
-            },
-            "day3": {
-                "activities": [
-                    {
-                        "activity": "Visit the Bisnakandi Waterfall",
-                        "time": "9:00 AM",
-                        "duration": "3-4 hours"
-                    },
-                    {
-                        "activity": "Relax at a tea garden cafe",
-                        "time": "1:00 PM",
-                        "duration": "2-3 hours"
-                    },
-                    {
-                        "activity": "Enjoy a scenic drive back to Dhaka",
-                        "time": "5:00 PM",
-                        "duration": "4-5 hours"
-                    }
-                ],
-                "bestSpots": "Bisnakandi Waterfall, Tea Garden Cafes",
-                "restaurants": "Local restaurants near the waterfall"
-            }
-        },
-        "mealPlan": {
-            "breakfast": [
-                {
-                    "option": "Paratha with egg and tea",
-                    "price": "100-150 BDT"
-                },
-                {
-                    "option": "Luchi with alur dom and tea",
-                    "price": "150-200 BDT"
-                }
-            ],
-            "lunch": [
-                {
-                    "option": "Biryani",
-                    "price": "200-300 BDT"
-                },
-                {
-                    "option": "Fish curry with rice",
-                    "price": "150-250 BDT"
-                }
-            ],
-            "dinner": [
-                {
-                    "option": "Chicken curry with rice",
-                    "price": "250-350 BDT"
-                },
-                {
-                    "option": "Vegetable curry with rice",
-                    "price": "150-250 BDT"
-                }
-            ],
-            "localSpecialties": "Tea, Tea-based snacks, Fish curry, Chicken curry, Biryani"
-        },
-        "costBreakdown": {
-            "transportationTotal": "1000-1400 BDT",
-            "accommodation": {
-                "budget": "1500-2000 BDT",
-                "midRange": "3000-6000 BDT",
-                "luxury": "7000+ BDT"
-            },
-            "foodExpenses": "1500-2000 BDT",
-            "activityCosts": "500-1000 BDT",
-            "emergencyFunds": "500-1000 BDT",
-            "totalBudgetPerPerson": "4500-7000 BDT"
-        },
-        "essentialTips": {
-            "bestTimeToVisit": "October to March (winter season)",
-            "weatherConsiderations": "Expect pleasant weather with occasional rain during winter",
-            "localCustoms": "Respect local customs and traditions, dress modestly",
-            "safetyPrecautions": "Be aware of your surroundings, avoid walking alone at night",
-            "whatToPack": "Comfortable clothes, walking shoes, raincoat, sunscreen, insect repellent",
-            "contactNumbers": "Emergency numbers: 999, 100"
-        }
-    }
-}
-```
 # Weather
 
 ## a. Get weather info by location
@@ -299,8 +111,511 @@ Example Response:
 }
 ```
 
+# Tour
 
+## a. Get all images from a user tour
+Endpoint URL: `GET /api/v1/images`  
+Request Body:   
+```json
 
+```
+Example Response:
+```json
+{
+    "success": true,
+    "message": "Images retrieved successfully",
+    "data": [
+        {
+            "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792279/tour-album/qwz8gedq1hyohou7cesg.jpg"
+        },
+        {
+            "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792289/tour-album/zqzceniffdxo2p8c5n3z.jpg"
+        },
+        {
+            "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792305/tour-album/qhutirsrlvb1gp7ntts4.jpg"
+        }
+    ]
+}
+```
+
+# Tour
+
+## a. Get all images from a user with tour id
+Endpoint URL: `GET /api/v1/images/:id`  
+Request Body:   
+```json
+
+```
+Example Response:
+```json
+{
+    "success": true,
+    "message": "Images retrieved successfully",
+    "data": [
+        {
+            "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792279/tour-album/qwz8gedq1hyohou7cesg.jpg"
+        },
+        {
+            "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792289/tour-album/zqzceniffdxo2p8c5n3z.jpg"
+        },
+        {
+            "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792305/tour-album/qhutirsrlvb1gp7ntts4.jpg"
+        }
+    ]
+}
+```
+
+# Tour
+
+## a. Get videos from a user tour id 
+Endpoint URL: `GET /api/v1/videos/:id`  
+Request Body:   
+```json
+
+```
+Example Response:
+```json
+{
+    "success": true,
+    "message": "Video retrieved successfully",
+    "data":             
+    "https://res.cloudinary.com/dg1sx19ve/video/upload/v1729792994/dhv0qwf1quvdhk4j9ecl.mp4"
+}
+```
+
+# Tour
+
+## a. Post all info from a  tour
+Endpoint URL: `POST /api/v1/tour`  
+Request Body:   
+```json
+{
+    "email": "example@example.com",
+    "userInput": {
+        "from": "New York",
+        "to": "Paris",
+        "startDate": "2024-11-01",
+        "endDate": "2024-11-10"
+    },
+    "hotel": {
+        "name": "Hotel de Paris",
+        "latitude": "48.8566",
+        "longitude": "2.3522"
+    },
+    "estimationBudget": {
+        "accommodation": "1000",
+        "food": "500",
+        "sightseeing": "300",
+        "transportation": "700"
+    },
+    "tourPlan": [
+        {
+            "day": "Day 1 (2024-11-01)",
+            "tasks": [
+                {
+                    "activity": "Visit Eiffel Tower",
+                    "estimated_time": "2 hours",
+                    "latitude": "48.8584",
+                    "longitude": "2.2945",
+                    "place": "Paris",
+                    "status": "pending"
+                },
+                {
+                    "activity": "Lunch at a cafe",
+                    "estimated_time": "1 hour",
+                    "latitude": "48.8590",
+                    "longitude": "2.2975",
+                    "place": "Paris",
+                    "status": "pending"
+                }
+            ]
+        }
+    ],
+    "location": "Paris",
+    "transportation": {
+        "start": "New York",
+        "end": "Paris",
+        "type": "Flight",
+        "price": "500",
+        "duration": "8 hours"
+    },
+    "accommodation": {
+        "name": "Hotel de Paris",
+        "priceRange": "Luxury"
+    },
+    "mealPlan": {
+        "option": "Full Board",
+        "price": "200"
+    },
+    "costBreakdown": {
+        "transportationTotal": "500",
+        "accommodation": {
+            "budget": "400",
+            "midRange": "700",
+            "luxury": "1000"
+        },
+        "foodExpenses": "200",
+        "activityCosts": "100",
+        "emergencyFunds": "150",
+        "totalBudgetPerPerson": "1950"
+    },
+    "essentialTips": {
+        "bestTimeToVisit": "Spring",
+        "weatherConsiderations": "Mild weather",
+        "localCustoms": "Be polite and learn basic French",
+        "safetyPrecautions": "Watch for pickpockets",
+        "whatToPack": "Comfortable shoes, light jacket",
+        "contactNumbers": "112 for emergencies"
+    }
+}
+```
+Example Response:
+```json
+{
+    "success": true,
+    "message": "Tour created successfully",
+    "data": {
+        "name": "Tour-2",
+        "email": "example@example.com",
+        "userInput": {
+            "from": "New York",
+            "to": "Paris",
+            "startDate": "2024-11-01",
+            "endDate": "2024-11-10"
+        },
+        "hotel": {
+            "name": "Hotel de Paris",
+            "latitude": "48.8566",
+            "longitude": "2.3522"
+        },
+        "estimationBudget": {
+            "accommodation": "1000",
+            "food": "500",
+            "sightseeing": "300",
+            "transportation": "700"
+        },
+        "tourPlan": [
+            {
+                "day": "Day 1 (2024-11-01)",
+                "tasks": [
+                    {
+                        "activity": "Visit Eiffel Tower",
+                        "estimated_time": "2 hours",
+                        "latitude": "48.8584",
+                        "longitude": "2.2945",
+                        "place": "Paris",
+                        "status": "pending"
+                    },
+                    {
+                        "activity": "Lunch at a cafe",
+                        "estimated_time": "1 hour",
+                        "latitude": "48.8590",
+                        "longitude": "2.2975",
+                        "place": "Paris",
+                        "status": "pending"
+                    }
+                ]
+            }
+        ],
+        "album": [],
+        "tourVideo": "",
+        "_id": "671a9a482788617795e9d9f8",
+        "dailyItinerary": [],
+        "__v": 0
+    }
+}
+```
+
+# Tour
+
+## a. Get all tour info of a user
+Endpoint URL: `GET /api/v1/tour`  
+Request Body:   
+```json
+
+```
+Example Response:
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "_id": "671a87cdf4456a1546dffe5f",
+            "name": "Tour-1",
+            "email": "example@example.com",
+            "userInput": {
+                "from": "New York",
+                "to": "Los Angeles",
+                "startDate": "2024-10-26",
+                "endDate": "2024-11-02"
+            },
+            "hotel": {
+                "name": "Grand Hotel",
+                "latitude": "34.0522",
+                "longitude": "-118.2437"
+            },
+            "estimationBudget": {
+                "accommodation": "2000",
+                "food": "700",
+                "sightseeing": "300",
+                "transportation": "400"
+            },
+            "tourPlan": [
+                {
+                    "day": "Day 1 (2024-10-26)",
+                    "tasks": [
+                        {
+                            "activity": "Visit Central Park",
+                            "estimated_time": "3 hours",
+                            "latitude": "40.7851",
+                            "longitude": "-73.9683",
+                            "place": "Central Park",
+                            "status": "pending"
+                        },
+                        {
+                            "activity": "Lunch at a local restaurant",
+                            "estimated_time": "2 hours",
+                            "latitude": "40.7831",
+                            "longitude": "-73.9712",
+                            "place": "Restaurant Name",
+                            "status": "pending"
+                        }
+                    ]
+                },
+                {
+                    "day": "Day 2 (2024-10-27)",
+                    "tasks": [
+                        {
+                            "activity": "Explore Hollywood",
+                            "estimated_time": "4 hours",
+                            "latitude": "34.0928",
+                            "longitude": "-118.3287",
+                            "place": "Hollywood Sign",
+                            "status": "pending"
+                        }
+                    ]
+                }
+            ],
+            "album": [
+                {
+                    "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792279/tour-album/qwz8gedq1hyohou7cesg.jpg"
+                },
+                {
+                    "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792289/tour-album/zqzceniffdxo2p8c5n3z.jpg"
+                },
+                {
+                    "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729792305/tour-album/qhutirsrlvb1gp7ntts4.jpg"
+                }
+            ],
+            "tourVideo": "https://res.cloudinary.com/dg1sx19ve/video/upload/v1729792994/dhv0qwf1quvdhk4j9ecl.mp4",
+            "dailyItinerary": [],
+            "__v": 0
+        },
+        {
+            "_id": "671a9a482788617795e9d9f8",
+            "name": "Tour-2",
+            "email": "example@example.com",
+            "userInput": {
+                "from": "New York",
+                "to": "Paris",
+                "startDate": "2024-11-01",
+                "endDate": "2024-11-10"
+            },
+            "hotel": {
+                "name": "Hotel de Paris",
+                "latitude": "48.8566",
+                "longitude": "2.3522"
+            },
+            "estimationBudget": {
+                "accommodation": "1000",
+                "food": "500",
+                "sightseeing": "300",
+                "transportation": "700"
+            },
+            "tourPlan": [
+                {
+                    "day": "Day 1 (2024-11-01)",
+                    "tasks": [
+                        {
+                            "activity": "Visit Eiffel Tower",
+                            "estimated_time": "2 hours",
+                            "latitude": "48.8584",
+                            "longitude": "2.2945",
+                            "place": "Paris",
+                            "status": "pending"
+                        },
+                        {
+                            "activity": "Lunch at a cafe",
+                            "estimated_time": "1 hour",
+                            "latitude": "48.8590",
+                            "longitude": "2.2975",
+                            "place": "Paris",
+                            "status": "pending"
+                        }
+                    ]
+                }
+            ],
+            "album": [],
+            "tourVideo": "",
+            "dailyItinerary": [],
+            "__v": 0
+        }
+    ]
+}
+```
+
+# Tour
+
+## a. Get user tour id
+Endpoint URL: `GET /api/v1/tour/:id`  
+Request Body:   
+```json
+
+```
+Example Response:
+```json
+{
+    "success": true,
+    "data": {
+        "_id": "671a9a482788617795e9d9f8",
+        "name": "Tour-2",
+        "email": "example@example.com",
+        "userInput": {
+            "from": "New York",
+            "to": "Paris",
+            "startDate": "2024-11-01",
+            "endDate": "2024-11-10"
+        },
+        "hotel": {
+            "name": "Hotel de Paris",
+            "latitude": "48.8566",
+            "longitude": "2.3522"
+        },
+        "estimationBudget": {
+            "accommodation": "1000",
+            "food": "500",
+            "sightseeing": "300",
+            "transportation": "700"
+        },
+        "tourPlan": [
+            {
+                "day": "Day 1 (2024-11-01)",
+                "tasks": [
+                    {
+                        "activity": "Visit Eiffel Tower",
+                        "estimated_time": "2 hours",
+                        "latitude": "48.8584",
+                        "longitude": "2.2945",
+                        "place": "Paris",
+                        "status": "pending"
+                    },
+                    {
+                        "activity": "Lunch at a cafe",
+                        "estimated_time": "1 hour",
+                        "latitude": "48.8590",
+                        "longitude": "2.2975",
+                        "place": "Paris",
+                        "status": "pending"
+                    }
+                ]
+            }
+        ],
+        "album": [],
+        "tourVideo": "",
+        "dailyItinerary": [],
+        "__v": 0
+    }
+}
+```
+
+# upload images
+
+## a. POST images
+Endpoint URL: `POST /api/v1/tour/uploadimage/:tourId`  
+Request Body:   
+```json
+{
+    upload image (key value pair)
+}
+```
+Example Response:
+```json
+{
+    "message": "Image added to album",
+    "data": {
+        "_id": "671a9a482788617795e9d9f8",
+        "name": "Tour-2",
+        "email": "example@example.com",
+        "userInput": {
+            "from": "New York",
+            "to": "Paris",
+            "startDate": "2024-11-01",
+            "endDate": "2024-11-10"
+        },
+        "hotel": {
+            "name": "Hotel de Paris",
+            "latitude": "48.8566",
+            "longitude": "2.3522"
+        },
+        "estimationBudget": {
+            "accommodation": "1000",
+            "food": "500",
+            "sightseeing": "300",
+            "transportation": "700"
+        },
+        "tourPlan": [
+            {
+                "day": "Day 1 (2024-11-01)",
+                "tasks": [
+                    {
+                        "activity": "Visit Eiffel Tower",
+                        "estimated_time": "2 hours",
+                        "latitude": "48.8584",
+                        "longitude": "2.2945",
+                        "place": "Paris",
+                        "status": "pending"
+                    },
+                    {
+                        "activity": "Lunch at a cafe",
+                        "estimated_time": "1 hour",
+                        "latitude": "48.8590",
+                        "longitude": "2.2975",
+                        "place": "Paris",
+                        "status": "pending"
+                    }
+                ]
+            }
+        ],
+        "album": [
+            {
+                "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729797263/tour-album/upze4frcggvergxx7ric.jpg"
+            },
+            {
+                "url": "https://res.cloudinary.com/dg1sx19ve/image/upload/v1729797312/tour-album/ibkf3ifdht3mh56m2xtp.jpg"
+            }
+        ],
+        "tourVideo": "",
+        "dailyItinerary": [],
+        "__v": 0
+    }
+}
+```
+# create video
+
+## a. POST images
+Endpoint URL: `POST /api/v1/tour/video/:tourId`  
+Request Body:   
+```json
+
+```
+Example Response:
+```json
+{
+    "message": "Video created and uploaded successfully",
+    "videoUrl": 
+    "https://res.cloudinary.com/dg1sx19ve/video/upload/v1729797424/i123k9wsdattypkhry1a.mp4"
+}
+```
 
 
 

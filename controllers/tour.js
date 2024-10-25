@@ -122,7 +122,6 @@ const addImageToTour = async (req, res) => {
         res.status(500).json({ message: 'Error adding image to album', error: error.message });
     }
 };
-
 const createVideoForTour = async (req, res) => {
     try {
         const { id } = req.params;
@@ -139,37 +138,27 @@ const createVideoForTour = async (req, res) => {
 
         const imagePaths = tour.album.map(image => image.url);
         const outputPath = path.join(tempDir, `tour-video-${id}.mp4`);
-        
-        // Create a text file containing the list of input images
         const inputListPath = path.join(tempDir, `input-list-${id}.txt`);
+
         let inputFileContent = '';
-        
-        // Download images and prepare input file
         const tempImagePaths = [];
+        
         for (let i = 0; i < imagePaths.length; i++) {
             const imagePath = path.join(tempDir, `image-${i}-${path.basename(imagePaths[i])}`);
             await downloadImage(imagePaths[i], imagePath);
             tempImagePaths.push(imagePath);
-            // Each image will be shown for 3 seconds
             inputFileContent += `file '${imagePath}'\nduration 3\n`;
         }
-        // Add the last image entry without duration (required by ffmpeg)
         inputFileContent += `file '${tempImagePaths[tempImagePaths.length - 1]}'`;
-        
+
         await fs.promises.writeFile(inputListPath, inputFileContent);
+        console.log(`Input list file created at: ${inputListPath}`);
 
         return new Promise((resolve, reject) => {
             ffmpeg()
                 .input(inputListPath)
-                .inputOptions([
-                    '-f concat',
-                    '-safe 0'
-                ])
-                .outputOptions([
-                    '-vf scale=640:360,format=yuv420p',
-                    '-r 25',
-                    '-movflags +faststart'
-                ])
+                .inputOptions(['-f concat', '-safe 0'])
+                .outputOptions(['-vf scale=640:360,format=yuv420p', '-r 25', '-movflags +faststart'])
                 .save(outputPath)
                 .on('end', async () => {
                     try {
@@ -179,13 +168,7 @@ const createVideoForTour = async (req, res) => {
                         await tour.save();
 
                         // Cleanup temporary files
-                        tempImagePaths.forEach(filePath => {
-                            if (fs.existsSync(filePath)) {
-                                fs.unlinkSync(filePath);
-                            }
-                        });
-                        fs.unlinkSync(inputListPath);
-                        fs.unlinkSync(outputPath);
+                        await cleanupTempFiles(tempImagePaths, inputListPath, outputPath);
 
                         res.status(200).json({ 
                             message: 'Video created and uploaded successfully', 
@@ -193,23 +176,14 @@ const createVideoForTour = async (req, res) => {
                         });
                         resolve();
                     } catch (error) {
+                        console.error('Error during video upload or cleanup:', error);
                         reject(error);
                     }
                 })
-                .on('error', (err) => {
+                .on('error', async (err) => {
                     console.error('Error creating video:', err);
                     // Cleanup temporary files in case of error
-                    tempImagePaths.forEach(filePath => {
-                        if (fs.existsSync(filePath)) {
-                            fs.unlinkSync(filePath);
-                        }
-                    });
-                    if (fs.existsSync(inputListPath)) {
-                        fs.unlinkSync(inputListPath);
-                    }
-                    if (fs.existsSync(outputPath)) {
-                        fs.unlinkSync(outputPath);
-                    }
+                    await cleanupTempFiles(tempImagePaths, inputListPath, outputPath);
                     res.status(500).json({ error: 'Error creating video' });
                     reject(err);
                 });
@@ -217,6 +191,29 @@ const createVideoForTour = async (req, res) => {
     } catch (error) {
         console.error('Error in createVideoForTour:', error);
         res.status(500).json({ error: error.message });
+    }
+};
+
+// Function to clean up temporary files
+const cleanupTempFiles = async (imagePaths, inputListPath, outputPath) => {
+    try {
+        // Delete temporary image files
+        for (const imagePath of imagePaths) {
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            }
+        }
+        // Delete the input list file
+        if (fs.existsSync(inputListPath)) {
+            fs.unlinkSync(inputListPath);
+        }
+        // Delete the output video file
+        if (fs.existsSync(outputPath)) {
+            fs.unlinkSync(outputPath);
+        }
+        console.log('Temporary files cleaned up successfully.');
+    } catch (cleanupError) {
+        console.error('Error cleaning up temporary files:', cleanupError);
     }
 };
 
