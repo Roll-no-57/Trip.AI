@@ -16,6 +16,7 @@ const tour = require('./routes/tour')
 const demo = require('./routes/demo')
 const searchImage = require('./routes/searchImage')
 const blog = require('./routes/blog')
+const blogPost = require('./routes/blogPost')
 
 
 //declare and configure the app
@@ -44,7 +45,7 @@ app.use('/api/v1',tour);
 app.use('/api/v1',demo);
 app.use('/api/v1',searchImage);
 app.use('/api/v1',blog);
-
+app.use('/api/v1',blogPost);
 
 
 
