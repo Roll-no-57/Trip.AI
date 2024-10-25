@@ -32,7 +32,7 @@ router.post('/blog/:id', async (req, res) => {
         
 
         // Send the result directly as the response
-        res.status(200).json({ success: true, data: description });  // Only the result is returned
+        res.status(200).json({ success: true, data: response });  // Only the result is returned
     } catch (error) {
         console.error('Error during direct semantic search:', error);
         res.status(500).json({ success: false, message: 'Error performing semantic search.' });
