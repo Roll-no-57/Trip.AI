@@ -5,6 +5,7 @@ const { getAllTours,getTourById } = require('../controllers/getTour');
 const { getLatestTourByEmail } = require('../controllers/getTour');
 const { getAllImagesFromTours,getAllImagesFromSpecificTours } = require('../controllers/images');
 const { getVideoFromSpecificTour } = require('../controllers/video');
+const {getUserTours} = require('../controllers/getTour');
 const Tour = require('../models/tourmodel');
 
 
@@ -56,7 +57,7 @@ router.get('/images/:id', async (req, res) => {
         });
     }
 });
-
+router.get('/tour/user/:email', getUserTours);
 // router.get('/images/:id', getAllImagesFromSpecificTours);
 router.get('/videos/:id', getVideoFromSpecificTour);  
 router.post('/tour', saveTourInfo);

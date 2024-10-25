@@ -57,8 +57,49 @@ const getLatestTourByEmail = async (req, res) => {
     }
 };
 
+const getUserTours = async (req, res) => {
+    try {
+      const { email } = req.params;
+      console.log("Received email param:", email); // Debugging
+  
+      if (!email) {
+        return res.status(400).json({
+          success: false,
+          message: 'Email is required'
+        });
+      }
+  
+      const userTours = await Tour.find({ email }).select('name date album description').sort({ createdAt: -1 });
+      console.log("Tours found:", userTours); // Debugging
+  
+      if (!userTours.length) {
+        return res.status(200).json({
+          success: true,
+          message: 'No tours found for this user',
+          data: []
+        });
+      }
+  
+      res.status(200).json({
+        success: true,
+        message: 'User tours retrieved successfully',
+        data: userTours
+      });
+    } catch (error) {
+      console.error('Error fetching user tours:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error retrieving user tours',
+        error: error.message
+      });
+    }
+  };
+  
+
+
 module.exports = { 
     getAllTours, 
     getTourById, 
-    getLatestTourByEmail  // Add this to exports
+    getLatestTourByEmail,  // Add this to exports,
+    getUserTours
 };
