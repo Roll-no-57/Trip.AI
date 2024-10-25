@@ -1,5 +1,13 @@
 # AI-Trip-Planner
 
+## Team BUET_HELLO_WORLD
+members:Mosharaf Hossain Apurbo,Salehin Islam,Mohiuddin Sizan.
+
+## Presentation link
+[Presentation](https://docs.google.com/presentation/d/1daAea6V1FFQYZmh0r0VdH92OVq9BZM07cQ4pZni9BV8/edit#slide=id.p)
+## Frontend Code link 
+[Frontend Link](https://github.com/SALEHINISLAM/tour-travel?fbclid=IwZXh0bgNhZW0CMTEAAR3MCJjyAE1HBljDq4AAcCtgxNgSsHHHMwGkR7GPnV_ISQYg0GChV3BFcZo_aem_WKC-Xn71zbl9bEZpA30dJg)
+
 The respective API endpoints are as follows:    
 
 # Weather
