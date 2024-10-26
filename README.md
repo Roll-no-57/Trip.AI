@@ -9,6 +9,56 @@ members:Mosharaf Hossain Apurbo,Salehin Islam,Mohiuddin Sizan.
 ## Frontend Code link 
 [Frontend Link](https://github.com/SALEHINISLAM/tour-travel?fbclid=IwZXh0bgNhZW0CMTEAAR3MCJjyAE1HBljDq4AAcCtgxNgSsHHHMwGkR7GPnV_ISQYg0GChV3BFcZo_aem_WKC-Xn71zbl9bEZpA30dJg)
 
+## About the Project
+Our AI-powered trip planning platform generates personalized itineraries,
+provides real-time weather updates, and enables intuitive image search for a
+seamless travel experience.
+
+
+## Built with
+MERN Stack
+
+## External APIs and AI Models and Hosted Services
+1. Weather -Open-Meteo
+2. Map API - valhalla routing service
+3. Firebase
+4. Pinecone
+5. MongoDB Atlas
+6. Cloudinary
+1. Gemini-1.5-flash
+2. Llava-v1.5-7b-4096-preview
+3. Jina-embeddings-v3
+4. facebook/musicgen
+11. Render Hosting Service
+
+
+## How to run 
+1. Clone the git repo or download the zip file
+2. Add a .env files with your own API keys or environment variables ,like
+```json
+    PORT='your_key'
+    GEMINI_API_KEY='your_key'
+    LONG_API_KEY='your_key'
+    MONGO_URI='your_key'
+    CLOUDINARY_CLOUD_NAME='your_key'
+    CLOUDINARY_API_KEY='your_key'
+    CLOUDINARY_API_SECRET='your_key'
+    MUX_API_KEY='your_key'
+    MUX_API_SECRET='your_key'
+    PINECONE_API_KEY='your_key'
+    JINA_API_KEY='your_key'
+```
+3. Build the project:
+```json
+npm install --legacy-peers-deps
+```
+4. Run the project :
+```json
+nodemon index.js
+```
+
+
+
 The respective API endpoints are as follows:    
 
 # Weather
@@ -668,10 +718,3 @@ Example Response:
     ]
 }
 ```
-
-
-
-
-
-
-
