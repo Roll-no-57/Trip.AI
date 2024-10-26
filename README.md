@@ -8,6 +8,8 @@ members:Mosharaf Hossain Apurbo,Salehin Islam,Mohiuddin Sizan.
 [Presentation](https://docs.google.com/presentation/d/1daAea6V1FFQYZmh0r0VdH92OVq9BZM07cQ4pZni9BV8/edit#slide=id.p)
 ## Frontend Code link 
 [Frontend Link](https://github.com/SALEHINISLAM/tour-travel?fbclid=IwZXh0bgNhZW0CMTEAAR3MCJjyAE1HBljDq4AAcCtgxNgSsHHHMwGkR7GPnV_ISQYg0GChV3BFcZo_aem_WKC-Xn71zbl9bEZpA30dJg)
+## Backend Hosted link
+[Backend Base URL](https://ai-trip-planner-fjpp.onrender.com)
 
 ## About the Project
 Our AI-powered trip planning platform generates personalized itineraries,
