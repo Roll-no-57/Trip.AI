@@ -61,7 +61,7 @@ nodemon index.js
 
 
 
-The respective API endpoints are as follows:    
+## The respective API endpoints are as follows:    
 
 # Weather
 
