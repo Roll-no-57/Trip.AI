@@ -37,7 +37,7 @@ MERN Stack
 ## How to run 
 1. Clone the git repo or download the zip file
 2. Add a .env files with your own API keys or environment variables ,like
-```json
+```env
     PORT='your_key'
     GEMINI_API_KEY='your_key'
     LONG_API_KEY='your_key'
@@ -51,11 +51,11 @@ MERN Stack
     JINA_API_KEY='your_key'
 ```
 3. Build the project:
-```json
+```bash
 npm install --legacy-peers-deps
 ```
 4. Run the project :
-```json
+```bash
 nodemon index.js
 ```
 
