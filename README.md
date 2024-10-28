@@ -1,7 +1,7 @@
 # AI-Trip-Planner
 
 ## BUET CSE FEST 24 Hackathon AI/API section
-### Team BUET_HELLO_WORLD
+### Team BUET_HELLO_WORLD (Best Documentation award)
 members:Mosharaf Hossain Apurbo,Salehin Islam,Mohiuddin Sizan.
 
 ## Presentation link
