@@ -15,7 +15,7 @@ members:Mosharaf Hossain Apurbo,Salehin Islam,Mohiuddin Sizan.
 
 ## About the Project
 Our AI-powered trip planning platform generates personalized itineraries,
-provides real-time weather updates, and enables intuitive image search for a
+provides real-time weather updates, and enables intuitive image search in natural language,AI generated blog generation ,automated Vlog generation and automated post to facebook page for a
 seamless travel experience.
 
 
